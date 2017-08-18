@@ -1,0 +1,9 @@
+C:\source\school-challenge\SchoolChallenge\bin\Debug\netcoreapp1.1\SchoolChallenge.deps.json
+C:\source\school-challenge\SchoolChallenge\bin\Debug\netcoreapp1.1\SchoolChallenge.runtimeconfig.json
+C:\source\school-challenge\SchoolChallenge\bin\Debug\netcoreapp1.1\SchoolChallenge.runtimeconfig.dev.json
+C:\source\school-challenge\SchoolChallenge\bin\Debug\netcoreapp1.1\SchoolChallenge.dll
+C:\source\school-challenge\SchoolChallenge\bin\Debug\netcoreapp1.1\SchoolChallenge.pdb
+C:\source\school-challenge\SchoolChallenge\obj\Debug\netcoreapp1.1\SchoolChallenge.csprojResolveAssemblyReference.cache
+C:\source\school-challenge\SchoolChallenge\obj\Debug\netcoreapp1.1\SchoolChallenge.AssemblyInfo.cs
+C:\source\school-challenge\SchoolChallenge\obj\Debug\netcoreapp1.1\SchoolChallenge.dll
+C:\source\school-challenge\SchoolChallenge\obj\Debug\netcoreapp1.1\SchoolChallenge.pdb
