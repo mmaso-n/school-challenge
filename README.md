@@ -8,7 +8,7 @@ A web application project, all code files, as well as any database create script
 - Fork this repository
 - Clone your fork of the repository
 - Commit / Push your code to the forked repository
-- Send the URL of the repository to your contact at Netrix
+- Send the URL of the repository to the person that sent you the original link to this repository
 
 
 ## Technical Requirements ##
