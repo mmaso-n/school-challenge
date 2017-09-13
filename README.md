@@ -18,6 +18,10 @@ A web application project, all code files, as well as any database create script
 - Custom styling - using some libraries, e.g. Bootstrap, is allowed, but please write some of your own as well
 - Unit tests for C# code
 
+Your web application should not utilize any of the MVC scaffolding (views or controllers). For example, it should not look like this or a stylized version of this:
+
+![MVC Scaffold](http://csharpcorner.mindcrackerinc.netdna-cdn.com/article/asp-net-mvc-5-crud-operation-scaffold-template-using-entity-framework/Images/Index.jpg)
+
 ## Guide ##
 Here are a couple user stories to help guide the development of the solution. 
 
