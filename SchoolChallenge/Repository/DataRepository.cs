@@ -24,6 +24,11 @@ namespace SchoolChallenge.Repository
             _settings = settings.Value;
         }
 
+        public DataRepository(Config settings)
+        {
+            _settings = settings;
+        }
+
         private CloudStorageAccount GetStorageAccount()
         {
             if (_cloudStorageAccount == null)
