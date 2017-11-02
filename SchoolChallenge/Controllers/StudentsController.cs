@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SchoolChallenge.Repository;
-using SchoolChallenge.Repository.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,9 +22,9 @@ namespace SchoolChallenge.Controllers
         [HttpGet("{school}")]
         public async Task<IEnumerable<string>> Get(string school)
         {
-            var students = await _dataRepository.GetStudentsAsync(school, null);
+            var students = await _dataRepository.GetAllStudentsAsync(school, null);
 
-            return new[] { students.Count().ToString() };
+            return new[] { students.Results.Count().ToString() };
         }
     }
 }

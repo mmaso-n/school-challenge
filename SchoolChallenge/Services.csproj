@@ -4,6 +4,13 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>SchoolChallenge</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repository\Data\**" />
+    <Content Remove="Repository\Data\**" />
+    <EmbeddedResource Remove="Repository\Data\**" />
+    <None Remove="Repository\Data\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
@@ -13,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
   </ItemGroup>
 
 </Project>

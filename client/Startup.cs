@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using static SchoolChallenge.Configuration;
 
-namespace client
+namespace Client
 {
     public class Startup
     {
@@ -18,6 +19,7 @@ namespace client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.Configure<Tenant>(Configuration.GetSection("Tenant"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

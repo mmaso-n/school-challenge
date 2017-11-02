@@ -1,10 +1,10 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 
-namespace SchoolChallenge.Repository.Data
+namespace SchoolChallenge.Repository.Entities
 {
     // PartitionKey: School
     // RowKey: TeacherId
-    public class Teacher : TableEntity
+    public class TeacherEntity : TableEntity
     {
         public string FirstName { get; set; }
 

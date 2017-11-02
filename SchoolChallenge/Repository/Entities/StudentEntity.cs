@@ -1,11 +1,14 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using Contracts;
+using Microsoft.WindowsAzure.Storage.Table;
 
-namespace SchoolChallenge.Repository.Data
+namespace SchoolChallenge.Repository.Entities
 {
     // PartitionKey: School
     // RowKey: StudentId
-    public class Student : TableEntity
+    public class StudentEntity : TableEntity
     {
+        public string Number { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

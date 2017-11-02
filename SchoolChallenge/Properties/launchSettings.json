@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/students",
+      "launchUrl": "api/students/milwaukee",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "SchoolChallenge": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/students",
+      "launchUrl": "api/students/milwaukee",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

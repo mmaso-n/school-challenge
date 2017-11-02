@@ -4,7 +4,18 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>SchoolChallenge</RootNamespace>
     <AssemblyName>Services.Tests.Integration</AssemblyName>
+    <StartupObject></StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
