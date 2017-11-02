@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using SchoolChallenge.Contracts;
 using SchoolChallenge.Repository.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolChallenge.Services.Repository
+namespace SchoolChallenge.Repository
 {
     public interface IDataRepository
     {
@@ -20,23 +19,23 @@ namespace SchoolChallenge.Services.Repository
 
     public class DataRepository : IDataRepository
     {
-        private readonly Config _settings;
         private CloudStorageAccount _cloudStorageAccount;
 
-        public DataRepository(IOptions<Config> settings)
-        {
-            _settings = settings.Value;
-        }
+        private readonly string _connectionString;
+        private readonly string _teacherTableName;        
+        private readonly string _studentTableName;
 
-        public DataRepository(Config settings)
+        public DataRepository(string connectionString, string studentTableName, string teacherTableName)
         {
-            _settings = settings;
+            _connectionString = connectionString;
+            _studentTableName = studentTableName;
+            _teacherTableName = teacherTableName;
         }
-
+        
         private CloudStorageAccount GetStorageAccount()
         {
             if (_cloudStorageAccount == null)
-                _cloudStorageAccount = CloudStorageAccount.Parse(_settings.StorageConnectionString);
+                _cloudStorageAccount = CloudStorageAccount.Parse(_connectionString);
 
             return _cloudStorageAccount;
         }
@@ -45,7 +44,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount().
                 CreateCloudTableClient().
-                GetTableReference(_settings.StudentTable);
+                GetTableReference(_studentTableName);
 
             var query = new TableQuery<StudentEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school));
@@ -65,7 +64,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount()
                 .CreateCloudTableClient()
-                .GetTableReference(_settings.TeacherTable);
+                .GetTableReference(_teacherTableName);
 
             var query = new TableQuery<TeacherEntity>().Where(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school));
@@ -85,7 +84,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount()
                 .CreateCloudTableClient()
-                .GetTableReference(_settings.StudentTable);
+                .GetTableReference(_studentTableName);
 
             var entity = student.ToRepositoryEntity();
 
@@ -98,7 +97,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount()
                 .CreateCloudTableClient()
-                .GetTableReference(_settings.TeacherTable);
+                .GetTableReference(_teacherTableName);
 
             var entity = teacher.ToRepositoryEntity();
 
@@ -111,7 +110,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount()
                 .CreateCloudTableClient()
-                .GetTableReference(_settings.StudentTable);
+                .GetTableReference(_studentTableName);
 
             var entity = student.ToRepositoryEntity();
             entity.ETag = "*";
@@ -125,7 +124,7 @@ namespace SchoolChallenge.Services.Repository
         {
             var table = GetStorageAccount()
                 .CreateCloudTableClient()
-                .GetTableReference(_settings.TeacherTable);
+                .GetTableReference(_teacherTableName);
 
             var entity = teacher.ToRepositoryEntity();
             entity.ETag = "*";

@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>SchoolChallenge.Services.Tests.Integration</RootNamespace>
-    <AssemblyName>Services.Tests.Integration</AssemblyName>
+    <RootNamespace>SchoolChallenge.Repository.Tests.Integration</RootNamespace>
+    <AssemblyName>Repository.Tests.Integration</AssemblyName>
     <StartupObject></StartupObject>
   </PropertyGroup>
 
@@ -19,12 +19,16 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SchoolChallenge\Services.csproj" />
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
 </Project>

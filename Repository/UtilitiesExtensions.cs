@@ -3,7 +3,7 @@ using SchoolChallenge.Contracts;
 using SchoolChallenge.Repository.Entities;
 using System;
 
-namespace SchoolChallenge.Services.Repository
+namespace SchoolChallenge.Repository
 {
     public static class UtilitiesExtensions
     {

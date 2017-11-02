@@ -3,15 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage.Table;
 using SchoolChallenge.Contracts;
 using SchoolChallenge.Fixtures;
+using SchoolChallenge.Repository;
 using SchoolChallenge.Repository.Entities;
-using SchoolChallenge.Services;
-using SchoolChallenge.Services.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Services.Tests.Integration.Repository
+namespace Repository.Tests.Integration.Repository
 {
     public class TeacherTests
     {
@@ -30,22 +29,17 @@ namespace Services.Tests.Integration.Repository
             _repositoryConnectionString = testConfig.StorageConnectionString;
         }
 
-        [Fact]
+        [Fact(Skip = "Run integration tests on-demand as necessary.")]
         public async void TestGetAllTeachersWithPagination()
         {
             // arrange
             var mockRecordCount = 2277;
             var mockSchoolName = "test school name goes here";
+            var testTableName = "testteachertablepaging";
 
-            var _configuration = new Config
-            {
-                StorageConnectionString = _repositoryConnectionString,
-                TeacherTable = "testteachertablepaging"
-            };
+            var classUnderTest = new DataRepository(_repositoryConnectionString, null, testTableName);
 
-            var classUnderTest = new DataRepository(_configuration);
-
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
+            using (var fixture = new TableFixture(_repositoryConnectionString, testTableName))
             {
                 fixture.Table.Should().NotBeNull();
 
@@ -78,22 +72,17 @@ namespace Services.Tests.Integration.Repository
             }
         }
 
-        [Fact]
+        [Fact(Skip = "Run integration tests on-demand as necessary.")]
         public async void TestGetAllTeachersWithoutPagination()
         {
             // arrange
             var mockRecordCount = 8;
             var mockSchoolName = "test school name goes here";
+            var testTableName = "testteachertablenopaging";
 
-            var _configuration = new Config
-            {
-                StorageConnectionString = _repositoryConnectionString,
-                TeacherTable = "testteachertablenopaging"
-            };
+            var classUnderTest = new DataRepository(_repositoryConnectionString, null, testTableName);
 
-            var classUnderTest = new DataRepository(_configuration);
-
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
+            using (var fixture = new TableFixture(_repositoryConnectionString, testTableName))
             {
                 fixture.Table.Should().NotBeNull();
 
@@ -126,21 +115,16 @@ namespace Services.Tests.Integration.Repository
             }
         }
 
-        [Fact]
+        [Fact(Skip = "Run integration tests on-demand as necessary.")]
         public async void TestUpsertTeacher()
         {
             // arrange
             var mockSchoolName = "test school name goes here";
+            var testTableName = "testupsertteacher";
 
-            var _configuration = new Config
-            {
-                StorageConnectionString = _repositoryConnectionString,
-                TeacherTable = "testupsertteacher"
-            };
+            var classUnderTest = new DataRepository(_repositoryConnectionString, null, testTableName);
 
-            var classUnderTest = new DataRepository(_configuration);
-
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
+            using (var fixture = new TableFixture(_repositoryConnectionString, testTableName))
             {
                 fixture.Table.Should().NotBeNull();
 
@@ -200,21 +184,16 @@ namespace Services.Tests.Integration.Repository
             }
         }
 
-        [Fact]
+        [Fact(Skip = "Run integration tests on-demand as necessary.")]
         public async void TestDeleteTeacher()
         {
             // arrange
             var mockSchoolName = "test school name goes here";
+            var testTableName = "testdeleteteacher";
 
-            var _configuration = new Config
-            {
-                StorageConnectionString = _repositoryConnectionString,
-                TeacherTable = "testdeleteteacher"
-            };
+            var classUnderTest = new DataRepository(_repositoryConnectionString, null, testTableName);
 
-            var classUnderTest = new DataRepository(_configuration);
-
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
+            using (var fixture = new TableFixture(_repositoryConnectionString, testTableName))
             {
                 fixture.Table.Should().NotBeNull();
 

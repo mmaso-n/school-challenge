@@ -1,4 +1,4 @@
-﻿namespace Services.Tests.Integration.Repository
+﻿namespace Repository.Tests.Integration.Repository
 {
     public class TestConfiguration
     {

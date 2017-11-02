@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SchoolChallenge.Services.Repository;
+using SchoolChallenge.Repository;
 
 namespace SchoolChallenge.Services
 {
