@@ -1,23 +1,23 @@
-﻿using Contracts;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage.Table;
-using SchoolChallenge;
+using SchoolChallenge.Contracts;
 using SchoolChallenge.Fixtures;
-using SchoolChallenge.Repository;
 using SchoolChallenge.Repository.Entities;
+using SchoolChallenge.Services;
+using SchoolChallenge.Services.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Services.Tests.Integration
+namespace Services.Tests.Integration.Repository
 {
-    public class StudentTests
+    public class TeacherTests
     {
         private readonly string _repositoryConnectionString;
 
-        public StudentTests()
+        public TeacherTests()
         {
             // Bind test configuration
             var config = new ConfigurationBuilder()
@@ -28,30 +28,30 @@ namespace Services.Tests.Integration
             config.GetSection("RepositorySettings").Bind(testConfig);
 
             _repositoryConnectionString = testConfig.StorageConnectionString;
-        }        
+        }
 
         [Fact]
-        public async void TestGetAllStudentsWithPagination()
+        public async void TestGetAllTeachersWithPagination()
         {
             // arrange
-            var mockRecordCount = 2411;
+            var mockRecordCount = 2277;
             var mockSchoolName = "test school name goes here";
 
             var _configuration = new Config
             {
                 StorageConnectionString = _repositoryConnectionString,
-                StudentTable = "teststudenttablepaging"
+                TeacherTable = "testteachertablepaging"
             };
 
             var classUnderTest = new DataRepository(_configuration);
 
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.StudentTable))
+            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
             {
                 fixture.Table.Should().NotBeNull();
 
                 // build mock data
                 Enumerable.Range(1, mockRecordCount)
-                    .Select(i => new StudentEntity
+                    .Select(i => new TeacherEntity
                     {
                         PartitionKey = mockSchoolName,
                         RowKey = i.ToString(),
@@ -63,11 +63,11 @@ namespace Services.Tests.Integration
 
                 // act                
                 RepositoryContinationToken tableContinuationToken = null;
-                var results = new List<Student>();
+                var results = new List<Teacher>();
 
                 do
                 {
-                    var result = await classUnderTest.GetAllStudentsAsync(mockSchoolName, tableContinuationToken);
+                    var result = await classUnderTest.GetAllTeachersAsync(mockSchoolName, tableContinuationToken);
                     tableContinuationToken = result.ContinuationToken;
                     results.AddRange(result.Results);
                 }
@@ -79,27 +79,27 @@ namespace Services.Tests.Integration
         }
 
         [Fact]
-        public async void TestGetAllStudentsWithoutPagination()
+        public async void TestGetAllTeachersWithoutPagination()
         {
             // arrange
-            var mockRecordCount = 309;
+            var mockRecordCount = 8;
             var mockSchoolName = "test school name goes here";
 
             var _configuration = new Config
             {
                 StorageConnectionString = _repositoryConnectionString,
-                StudentTable = "teststudenttablenopaging"
+                TeacherTable = "testteachertablenopaging"
             };
 
             var classUnderTest = new DataRepository(_configuration);
 
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.StudentTable))
+            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
             {
                 fixture.Table.Should().NotBeNull();
 
                 // build mock data
                 Enumerable.Range(1, mockRecordCount)
-                    .Select(i => new StudentEntity
+                    .Select(i => new TeacherEntity
                     {
                         PartitionKey = mockSchoolName,
                         RowKey = i.ToString(),
@@ -111,11 +111,11 @@ namespace Services.Tests.Integration
 
                 // act                
                 RepositoryContinationToken tableContinuationToken = null;
-                var results = new List<Student>();
+                var results = new List<Teacher>();
 
                 do
                 {
-                    var result = await classUnderTest.GetAllStudentsAsync(mockSchoolName, tableContinuationToken);
+                    var result = await classUnderTest.GetAllTeachersAsync(mockSchoolName, tableContinuationToken);
                     tableContinuationToken = result.ContinuationToken;
                     results.AddRange(result.Results);
                 }
@@ -127,7 +127,7 @@ namespace Services.Tests.Integration
         }
 
         [Fact]
-        public async void TestUpsertStudent()
+        public async void TestUpsertTeacher()
         {
             // arrange
             var mockSchoolName = "test school name goes here";
@@ -135,85 +135,73 @@ namespace Services.Tests.Integration
             var _configuration = new Config
             {
                 StorageConnectionString = _repositoryConnectionString,
-                StudentTable = "testupsertstudent"
+                TeacherTable = "testupsertteacher"
             };
 
             var classUnderTest = new DataRepository(_configuration);
 
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.StudentTable))
+            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
             {
                 fixture.Table.Should().NotBeNull();
 
                 // perform initial write
-                var record = new Student
+                var record = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 12345,
                     FirstName = "Mike",
-                    LastName = "Smith",
-                    HasScholarship = false,
-                    TeacherId = 1234
+                    LastName = "Smith"
                 };
 
-                classUnderTest.UpsertStudentAsync(record).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(record).GetAwaiter().GetResult();
 
-                var initialResult = await classUnderTest.GetAllStudentsAsync(mockSchoolName);
+                var initialResult = await classUnderTest.GetAllTeachersAsync(mockSchoolName);
                 initialResult.Results.Should().ContainSingle();
                 initialResult.Results.Single().School.Should().BeEquivalentTo(mockSchoolName);
                 initialResult.Results.Single().Id.ShouldBeEquivalentTo(12345);
                 initialResult.Results.Single().FirstName.Should().BeEquivalentTo("Mike");
                 initialResult.Results.Single().LastName.Should().BeEquivalentTo("Smith");
-                initialResult.Results.Single().HasScholarship.Should().BeFalse();
-                initialResult.Results.Single().TeacherId.Should().Be(1234);
 
                 // perform update
-                record = new Student
+                record = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 12345,
-                    FirstName = "Mike",
+                    FirstName = "Michael",
                     LastName = "Smith",
-                    HasScholarship = true,
-                    TeacherId = 999
                 };
 
-                classUnderTest.UpsertStudentAsync(record).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(record).GetAwaiter().GetResult();
 
-                var updateResult = await classUnderTest.GetAllStudentsAsync(mockSchoolName);
+                var updateResult = await classUnderTest.GetAllTeachersAsync(mockSchoolName);
                 updateResult.Results.Should().ContainSingle();
                 updateResult.Results.Single().School.Should().BeEquivalentTo(mockSchoolName);
                 updateResult.Results.Single().Id.ShouldBeEquivalentTo(12345);
-                updateResult.Results.Single().FirstName.Should().BeEquivalentTo("Mike");
+                updateResult.Results.Single().FirstName.Should().BeEquivalentTo("Michael");
                 updateResult.Results.Single().LastName.Should().BeEquivalentTo("Smith");
-                updateResult.Results.Single().HasScholarship.Should().BeTrue();
-                updateResult.Results.Single().TeacherId.Should().Be(999);
 
                 // perform another update
-                record = new Student
+                record = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 12345,
-                    FirstName = "That's Mr. Mike",
-                    LastName = "Smith to you",
-                    HasScholarship = true,
-                    TeacherId = 999
+                    FirstName = "That's Mr. Michael",
+                    LastName = "Smith to you"
                 };
 
-                classUnderTest.UpsertStudentAsync(record).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(record).GetAwaiter().GetResult();
 
-                var subsequentUpdateResult = await classUnderTest.GetAllStudentsAsync(mockSchoolName);
+                var subsequentUpdateResult = await classUnderTest.GetAllTeachersAsync(mockSchoolName);
                 subsequentUpdateResult.Results.Should().ContainSingle();
                 subsequentUpdateResult.Results.Single().School.Should().BeEquivalentTo(mockSchoolName);
                 updateResult.Results.Single().Id.ShouldBeEquivalentTo(12345);
-                subsequentUpdateResult.Results.Single().FirstName.Should().BeEquivalentTo("That's Mr. Mike");
+                subsequentUpdateResult.Results.Single().FirstName.Should().BeEquivalentTo("That's Mr. Michael");
                 subsequentUpdateResult.Results.Single().LastName.Should().BeEquivalentTo("Smith to you");
-                subsequentUpdateResult.Results.Single().HasScholarship.Should().BeTrue();
-                subsequentUpdateResult.Results.Single().TeacherId.Should().Be(999);
             }
         }
 
         [Fact]
-        public async void TestDeleteStudent()
+        public async void TestDeleteTeacher()
         {
             // arrange
             var mockSchoolName = "test school name goes here";
@@ -221,57 +209,51 @@ namespace Services.Tests.Integration
             var _configuration = new Config
             {
                 StorageConnectionString = _repositoryConnectionString,
-                StudentTable = "testdeletestudent"
+                TeacherTable = "testdeleteteacher"
             };
 
             var classUnderTest = new DataRepository(_configuration);
 
-            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.StudentTable))
+            using (var fixture = new TableFixture(_configuration.StorageConnectionString, _configuration.TeacherTable))
             {
                 fixture.Table.Should().NotBeNull();
 
-                var studentOne = new Student
+                var TeacherOne = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 12345,
                     FirstName = "Mike",
-                    LastName = "Smith",
-                    HasScholarship = false,
-                    TeacherId = 1234
+                    LastName = "Smith"
                 };
 
-                var studentTwo = new Student
+                var TeacherTwo = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 7789,
                     FirstName = "Mary",
-                    LastName = "Doe",
-                    HasScholarship = true,
-                    TeacherId = 1234
+                    LastName = "Doe"
                 };
 
-                var studentThree = new Student
+                var TeacherThree = new Teacher
                 {
                     School = mockSchoolName,
                     Id = 4411,
                     FirstName = "Meridith",
-                    LastName = "Smith",
-                    HasScholarship = true,
-                    TeacherId = 4488
+                    LastName = "Smith"
                 };
 
-                classUnderTest.UpsertStudentAsync(studentOne).GetAwaiter().GetResult();
-                classUnderTest.UpsertStudentAsync(studentTwo).GetAwaiter().GetResult();
-                classUnderTest.UpsertStudentAsync(studentThree).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(TeacherOne).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(TeacherTwo).GetAwaiter().GetResult();
+                classUnderTest.UpsertTeacherAsync(TeacherThree).GetAwaiter().GetResult();
 
                 // act
-                await classUnderTest.DeleteStudentAsync(studentTwo);
+                await classUnderTest.DeleteTeacherAsync(TeacherTwo);
 
                 // assert
-                var result = await classUnderTest.GetAllStudentsAsync(mockSchoolName);
+                var result = await classUnderTest.GetAllTeachersAsync(mockSchoolName);
                 result.Results.Should().HaveCount(2);
-                result.Results.Should().Contain(x => x.School == studentOne.School && x.Id == studentOne.Id);
-                result.Results.Should().Contain(x => x.School == studentThree.School && x.Id == studentThree.Id);
+                result.Results.Should().Contain(x => x.School == TeacherOne.School && x.Id == TeacherOne.Id);
+                result.Results.Should().Contain(x => x.School == TeacherThree.School && x.Id == TeacherThree.Id);
             }
         }
     }

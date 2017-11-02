@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>SchoolChallenge</RootNamespace>
+    <RootNamespace>SchoolChallenge.Client</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

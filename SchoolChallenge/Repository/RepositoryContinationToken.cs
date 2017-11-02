@@ -1,4 +1,4 @@
-﻿namespace SchoolChallenge.Repository
+﻿namespace SchoolChallenge.Services.Repository
 {
     public class RepositoryContinationToken
     {

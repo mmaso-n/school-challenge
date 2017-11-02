@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SchoolChallenge.Repository
+namespace SchoolChallenge.Services.Repository
 {
     public class QueryResult<T>
     {

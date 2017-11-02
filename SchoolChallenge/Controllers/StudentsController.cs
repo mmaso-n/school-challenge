@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using SchoolChallenge.Repository;
+using SchoolChallenge.Services.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolChallenge.Controllers
+namespace SchoolChallenge.Services.Controllers
 {
     [Route("api/[controller]")]
     public class StudentsController : Controller

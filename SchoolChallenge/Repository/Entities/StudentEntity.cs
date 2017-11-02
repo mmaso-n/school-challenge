@@ -1,5 +1,4 @@
-﻿using Contracts;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace SchoolChallenge.Repository.Entities
 {

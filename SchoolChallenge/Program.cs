@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace SchoolChallenge
+namespace SchoolChallenge.Services
 {
     public class Program
     {

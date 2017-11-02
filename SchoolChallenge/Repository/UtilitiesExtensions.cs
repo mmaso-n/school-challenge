@@ -1,9 +1,9 @@
-﻿using Contracts;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
+using SchoolChallenge.Contracts;
 using SchoolChallenge.Repository.Entities;
 using System;
 
-namespace SchoolChallenge.Repository
+namespace SchoolChallenge.Services.Repository
 {
     public static class UtilitiesExtensions
     {

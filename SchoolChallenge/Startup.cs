@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SchoolChallenge.Repository;
+using SchoolChallenge.Services.Repository;
 
-namespace SchoolChallenge
+namespace SchoolChallenge.Services
 {
     public class Startup
     {

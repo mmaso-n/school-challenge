@@ -1,4 +1,4 @@
-﻿namespace SchoolChallenge
+﻿namespace SchoolChallenge.Services
 {
     public class Config
     {

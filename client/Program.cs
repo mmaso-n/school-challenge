@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Client
+namespace SchoolChallenge.Client
 {
     public class Program
     {

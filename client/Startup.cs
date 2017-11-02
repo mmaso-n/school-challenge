@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using static SchoolChallenge.Configuration;
+using static SchoolChallenge.Client.Configuration;
 
-namespace Client
+namespace SchoolChallenge.Client
 {
     public class Startup
     {

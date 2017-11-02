@@ -1,5 +1,5 @@
 ﻿
-namespace SchoolChallenge
+namespace SchoolChallenge.Client
 {
     public class Configuration
     {

@@ -1,4 +1,4 @@
-﻿namespace Contracts
+﻿namespace SchoolChallenge.Contracts
 {
     /// <summary>
     /// Represents a school student

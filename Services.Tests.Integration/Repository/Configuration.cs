@@ -1,4 +1,4 @@
-﻿namespace SchoolChallenge
+﻿namespace Services.Tests.Integration.Repository
 {
     public class TestConfiguration
     {

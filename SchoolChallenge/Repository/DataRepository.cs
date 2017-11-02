@@ -1,12 +1,12 @@
-﻿using Contracts;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using SchoolChallenge.Contracts;
 using SchoolChallenge.Repository.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolChallenge.Repository
+namespace SchoolChallenge.Services.Repository
 {
     public interface IDataRepository
     {
