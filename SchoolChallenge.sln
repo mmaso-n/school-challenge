@@ -3,16 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "SchoolChallenge\Services.csproj", "{126C9A77-7546-44AC-85E9-17BC9B24BA6D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{717F1249-9E80-4A6F-A224-1956D3BE25FF} = {717F1249-9E80-4A6F-A224-1956D3BE25FF}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "client\Client.csproj", "{59E279A8-D048-41A3-9156-D305FDF8AC2E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{717F1249-9E80-4A6F-A224-1956D3BE25FF} = {717F1249-9E80-4A6F-A224-1956D3BE25FF}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37668D62-D932-422A-B18C-2E05C37AC21D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -22,9 +12,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Tests.Integration", "Services.Tests.Integration\Repository.Tests.Integration.csproj", "{A6C67F4D-B23D-4B1E-931D-5B0580597CD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{504FED6A-A38F-4EDB-AFA5-E7426A3DF227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{504FED6A-A38F-4EDB-AFA5-E7426A3DF227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Tests", "Repository.Tests\Repository.Tests.csproj", "{6844CB23-94EE-4985-9980-034C18297E5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.Tests", "Repository.Tests\Repository.Tests.csproj", "{6844CB23-94EE-4985-9980-034C18297E5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Tests", "Services.Tests\Services.Tests.csproj", "{3D119247-4676-42C5-96B9-A674F6EC02CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{14AFCB29-8456-4ED6-95B4-D52AA05F50A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,14 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{126C9A77-7546-44AC-85E9-17BC9B24BA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{126C9A77-7546-44AC-85E9-17BC9B24BA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{126C9A77-7546-44AC-85E9-17BC9B24BA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{126C9A77-7546-44AC-85E9-17BC9B24BA6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59E279A8-D048-41A3-9156-D305FDF8AC2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59E279A8-D048-41A3-9156-D305FDF8AC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59E279A8-D048-41A3-9156-D305FDF8AC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59E279A8-D048-41A3-9156-D305FDF8AC2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{717F1249-9E80-4A6F-A224-1956D3BE25FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{717F1249-9E80-4A6F-A224-1956D3BE25FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{717F1249-9E80-4A6F-A224-1956D3BE25FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +42,14 @@ Global
 		{6844CB23-94EE-4985-9980-034C18297E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6844CB23-94EE-4985-9980-034C18297E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6844CB23-94EE-4985-9980-034C18297E5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D119247-4676-42C5-96B9-A674F6EC02CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D119247-4676-42C5-96B9-A674F6EC02CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D119247-4676-42C5-96B9-A674F6EC02CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D119247-4676-42C5-96B9-A674F6EC02CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AFCB29-8456-4ED6-95B4-D52AA05F50A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AFCB29-8456-4ED6-95B4-D52AA05F50A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AFCB29-8456-4ED6-95B4-D52AA05F50A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AFCB29-8456-4ED6-95B4-D52AA05F50A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

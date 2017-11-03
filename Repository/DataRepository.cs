@@ -11,6 +11,8 @@ namespace SchoolChallenge.Repository
     {
         Task<QueryResult<Student>> GetAllStudentsAsync(string school, RepositoryContinationToken continuationToken);
         Task<QueryResult<Teacher>> GetAllTeachersAsync(string school, RepositoryContinationToken continuationToken);
+        Task<QueryResult<Student>> SearchStudentsAsync(string school, int? studentId, string studentNumber, string firstName = null, string lastName = null, int? teacherId = null, bool? hasScholarship = default(bool?), RepositoryContinationToken continuationToken = null);
+        Task<QueryResult<Teacher>> SearchTeachersAsync(string school, int? teacherId, string lastName = null, string firstName = null, RepositoryContinationToken continuationToken = null);
         Task UpsertStudentAsync(Student student);
         Task UpsertTeacherAsync(Teacher teacher);
         Task DeleteStudentAsync(Student student);
@@ -132,6 +134,78 @@ namespace SchoolChallenge.Repository
             var operation = TableOperation.Delete(entity);
 
             await table.ExecuteAsync(operation);
+        }
+
+        public async Task<QueryResult<Student>> SearchStudentsAsync(string school, int? studentId, string studentNumber = null,
+            string firstName = null, string lastName = null, int? teacherId = null, bool? hasScholarship = default(bool?), 
+            RepositoryContinationToken continuationToken = null)
+        {
+            var table = GetStorageAccount().
+                CreateCloudTableClient().
+                GetTableReference(_studentTableName);
+
+            var filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school);
+            
+            if (studentId.HasValue)
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, studentId.Value.ToString()));
+
+            if (!string.IsNullOrWhiteSpace(studentNumber))
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.Number), QueryComparisons.Equal, studentNumber));
+
+            if (!string.IsNullOrWhiteSpace(firstName))
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.FirstName), QueryComparisons.Equal, firstName));
+
+            if (!string.IsNullOrWhiteSpace(lastName))
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.LastName), QueryComparisons.Equal, lastName));
+
+            if (teacherId.HasValue)
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterConditionForInt(nameof(StudentEntity.TeacherId), QueryComparisons.Equal, teacherId.Value));
+
+            if (hasScholarship.HasValue)
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterConditionForBool(nameof(StudentEntity.HasScholarship), QueryComparisons.Equal, hasScholarship.Value));
+
+            var query = new TableQuery<StudentEntity>().Where(filter.ToString());
+
+            var ct = continuationToken.ToRepositoryImplementation();
+
+            var results = await table.ExecuteQuerySegmentedAsync(query, ct);
+
+            return new QueryResult<Student>
+            {
+                Results = results.Results.Select(res => res.ToStudent()).ToList(),
+                ContinuationToken = new RepositoryContinationToken { Value = results.ContinuationToken }
+            };
+        }
+
+        public async Task<QueryResult<Teacher>> SearchTeachersAsync(string school, int? teacherId, 
+            string lastName = null, string firstName = null, RepositoryContinationToken continuationToken = null)
+        {
+            var table = GetStorageAccount()
+                .CreateCloudTableClient()
+                .GetTableReference(_teacherTableName);
+
+            var filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school);
+
+            if (teacherId.HasValue)
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, teacherId.Value.ToString()));
+
+            if (!string.IsNullOrWhiteSpace(firstName))
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.FirstName), QueryComparisons.Equal, firstName));
+
+            if (!string.IsNullOrWhiteSpace(lastName))
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.LastName), QueryComparisons.Equal, lastName));
+
+            var query = new TableQuery<TeacherEntity>().Where(filter.ToString());
+
+            var ct = continuationToken.ToRepositoryImplementation();
+
+            var results = await table.ExecuteQuerySegmentedAsync(query, ct);
+
+            return new QueryResult<Teacher>
+            {
+                Results = results.Results.Select(res => res.ToTeacher()).ToList(),
+                ContinuationToken = new RepositoryContinationToken { Value = results.ContinuationToken }
+            };
         }
     }
 }
