@@ -5,7 +5,7 @@ import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { TeachersComponent } from './components/teachers/teachers.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { PostComponent } from './components/post/post.component';
 
@@ -14,7 +14,7 @@ export const sharedConfig: NgModule = {
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
+        TeachersComponent,
         FetchDataComponent,
         HomeComponent,
         BlogComponent,
@@ -24,7 +24,7 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
+            { path: 'teachers', component: TeachersComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'blog', component: BlogComponent },
             { path: 'blog/:id', component: PostComponent },

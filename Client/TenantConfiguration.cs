@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SchoolChallenge.Client
+﻿namespace SchoolChallenge.Client
 {
-    public class TenantConfiguration
+    public interface ITenantConfiguration
+    {
+        string Tenant { get; set; }
+    }
+
+    public class TenantConfiguration: ITenantConfiguration
     {
         public string Tenant { get; set; }
     }

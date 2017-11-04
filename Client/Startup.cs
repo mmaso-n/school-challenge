@@ -36,8 +36,12 @@ namespace SchoolChallenge.Client
             var endpointConfig = new Config();
             config.GetSection("Endpoints").Bind(endpointConfig);
 
-            services.Configure<TenantConfiguration>(Configuration.GetSection("TenantConfiguration"));
-            services.AddSingleton<IHttpClient>(new ServicesHttpClient(endpointConfig.SchoolServiceEndpoint));            
+            var tenantConfig = new TenantConfiguration();
+            config.GetSection("TenantConfiguration").Bind(tenantConfig);
+
+            //services.Configure<TenantConfiguration>(Configuration.GetSection("TenantConfiguration"));
+            services.AddSingleton<ITenantConfiguration>(new TenantConfiguration { Tenant = tenantConfig.Tenant });
+            services.AddSingleton<IHttpClient>(new ServicesHttpClient(endpointConfig.SchoolServiceEndpoint));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

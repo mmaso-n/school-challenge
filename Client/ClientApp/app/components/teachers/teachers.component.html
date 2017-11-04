@@ -1,0 +1,20 @@
+<h1>Teachers</h1>
+
+<p>Our Teachers</p>
+
+<p *ngIf="!teachers"><em>Loading...</em></p>
+
+<table class='table' *ngIf="teachers">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let teacher of teachers">
+            <td>{{ teacher.id }}</td>
+            <td>{{ teacher.lastName }}, {{ teacher.firstName }}</td>
+        </tr>
+    </tbody>
+</table>

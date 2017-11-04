@@ -8,28 +8,28 @@ using System.Threading.Tasks;
 namespace SchoolChallenge.Client.Controllers
 {
     [Route("api/[controller]")]
-    public class StudentsController : Controller
+    public class TeachersController : Controller
     {
         IHttpClient _httpClient;
         ITenantConfiguration _tenantConfiguration;
 
-        public StudentsController(IHttpClient httpClient, ITenantConfiguration tenantConfiguration)
+        public TeachersController(IHttpClient httpClient, ITenantConfiguration tenantConfiguration)
         {
             _httpClient = httpClient;
             _tenantConfiguration = tenantConfiguration;
         }
 
         [HttpGet("[action]")]
-        public async Task<IEnumerable<Student>> GetAllStudents()
+        public async Task<IEnumerable<Teacher>> GetAllTeachersAsync()
         {
-            var results = new List<Student>();
-            var path = $"api/Students/getall/{_tenantConfiguration.Tenant}";
+            var results = new List<Teacher>();
+            var path = $"api/Teachers/getall/{_tenantConfiguration.Tenant}";
 
             HttpResponseMessage response = await _httpClient.GetAsync(path);
 
             if (response.IsSuccessStatusCode)
             {
-                results = await response.Content.ReadAsAsync<List<Student>>();
+                results = await response.Content.ReadAsAsync<List<Teacher>>();
             }
 
             return results;
