@@ -1,24 +1,26 @@
-<h1>Weather forecast</h1>
+<h1>Students</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>Our students</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!students"><em>Loading...</em></p>
 
-<table class='table' *ngIf="forecasts">
+<table class='table' *ngIf="students">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Id</th>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Scholarship?</th>
+            <th>TeacherId</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+        <tr *ngFor="let student of students">
+            <td>{{ student.id }}</td>
+            <td>{{ student.number }}</td>
+            <td>{{ student.lastName }}, {{ student.firstName }}</td>
+            <td>{{ student.hasScholarship }}</td>
+            <td>{{ student.teacherId }}</td>
         </tr>
     </tbody>
 </table>

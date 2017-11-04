@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SchoolChallenge.Client.ClientApp;
+using SchoolChallenge.Client.Dependencies;
+using System.Net.Http;
 
 namespace SchoolChallenge.Client
 {
@@ -30,7 +33,11 @@ namespace SchoolChallenge.Client
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
 
+            var endpointConfig = new Config();
+            config.GetSection("Endpoints").Bind(endpointConfig);
+
             services.Configure<TenantConfiguration>(Configuration.GetSection("TenantConfiguration"));
+            services.AddSingleton<IHttpClient>(new ServicesHttpClient(endpointConfig.SchoolServiceEndpoint));            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
