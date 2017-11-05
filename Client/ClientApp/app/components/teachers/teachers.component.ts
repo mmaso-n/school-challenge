@@ -28,11 +28,16 @@ export class TeachersComponent {
     }
 
     deleteTeacher(recordToDelete: Teacher): void {
-        this.doDelete(recordToDelete)
-            .subscribe(res => {
-                console.log(res);
-                location.reload(); // refresh display
-            });
+        if (confirm("Are you sure you want to delete this teacher?") == true) {
+            this.doDelete(recordToDelete)
+                .subscribe(res => {
+                    console.log(res);
+                    location.reload(); // refresh display
+                });
+        }
+        else {
+            // do nothing
+        }
     }
 }
 

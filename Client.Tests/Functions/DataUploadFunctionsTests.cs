@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using FluentAssertions;
 using System.IO;
 using SchoolChallenge.Client.Functions;
 using System.Linq;
-using SchoolChallenge.Contracts;
 
 namespace Client.Tests.Functions
 {

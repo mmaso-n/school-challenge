@@ -32,13 +32,17 @@ export class FetchDataComponent {
 
 
     deleteStudent(recordToDelete: Student): void {
-        this.doDelete(recordToDelete)
+        if (confirm("Are you sure you want to delete this student?") == true) {
+            this.doDelete(recordToDelete)
                 .subscribe(res => {
                     console.log(res);
                     location.reload(); // refresh display
                 });
+        } else {
+            // do nothing
         }
     }
+}
 
 
 interface Student {

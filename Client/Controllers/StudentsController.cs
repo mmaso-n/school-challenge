@@ -53,5 +53,24 @@ namespace SchoolChallenge.Client.Controllers
 
             _httpClient.PostAsync(path, formContent);
         }
+
+        [HttpPost("[action]")]
+        public void InsertStudent(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
+        {
+            var path = $"api/Students/insert";
+
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
+                new KeyValuePair<string, string>("id", id.ToString()),
+                new KeyValuePair<string, string>("number", number),
+                new KeyValuePair<string, string>("firstName", firstName),
+                new KeyValuePair<string, string>("lastName", lastName),
+                new KeyValuePair<string, string>("hasScholarship", hasScholarship.ToString()),
+                new KeyValuePair<string, string>("teacherId", teacherId.ToString())
+            });
+
+            _httpClient.PostAsync(path, formContent);
+        }
     }
 }

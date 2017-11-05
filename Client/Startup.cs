@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SchoolChallenge.Client.ClientApp;
 using SchoolChallenge.Client.Dependencies;
-using System.Net.Http;
 
 namespace SchoolChallenge.Client
 {

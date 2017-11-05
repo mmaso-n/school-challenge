@@ -1,8 +1,10 @@
 <h1>Students</h1>
 
-<p>Our students</p>
-
 <p *ngIf="!students"><em>Loading...</em></p>
+
+<a [routerLink]="['/insertstudent']">
+    <span style="cursor:pointer;">Add Student</span>
+</a>
 
 <table class='table' *ngIf="students">
     <thead>
