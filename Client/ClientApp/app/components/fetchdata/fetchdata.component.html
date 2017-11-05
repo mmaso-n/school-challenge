@@ -12,6 +12,7 @@
             <th>Name</th>
             <th>Scholarship?</th>
             <th>TeacherId</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
             <td>{{ student.lastName }}, {{ student.firstName }}</td>
             <td>{{ student.hasScholarship }}</td>
             <td>{{ student.teacherId }}</td>
+            <td><span class='glyphicon glyphicon-trash' (click)="deleteStudent(student)" style="cursor: pointer;" title="delete"></span></td>
         </tr>
     </tbody>
 </table>

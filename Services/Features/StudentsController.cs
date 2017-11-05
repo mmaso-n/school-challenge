@@ -98,8 +98,9 @@ namespace SchoolChallenge.Services.Controllers
             return Ok();
         }
 
-        // DELETE: delete/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}
-        [HttpDelete("delete/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}")]
+        // POST: delete/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}
+        [Route("delete")]
+        [HttpPost]
         public async Task<IActionResult> DeleteAsync(string school, int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
         {
             var toDelete = new Student

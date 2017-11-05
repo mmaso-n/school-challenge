@@ -20,7 +20,7 @@ namespace SchoolChallenge.Client.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IEnumerable<Student>> GetAllStudents()
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
             var results = new List<Student>();
             var path = $"api/Students/getall/{_tenantConfiguration.Tenant}";
@@ -33,6 +33,25 @@ namespace SchoolChallenge.Client.Controllers
             }
 
             return results;
+        }
+
+        [HttpPost("[action]")]
+        public void DeleteStudent(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
+        {
+            var path = $"api/Students/delete";
+
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
+                new KeyValuePair<string, string>("id", id.ToString()),
+                new KeyValuePair<string, string>("number", number),
+                new KeyValuePair<string, string>("firstName", firstName),
+                new KeyValuePair<string, string>("lastName", lastName),
+                new KeyValuePair<string, string>("hasScholarship", hasScholarship.ToString()),
+                new KeyValuePair<string, string>("teacherId", teacherId.ToString())
+            });
+
+            _httpClient.PostAsync(path, formContent);            
         }
     }
 }

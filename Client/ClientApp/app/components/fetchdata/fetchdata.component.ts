@@ -7,13 +7,39 @@ import { Http } from '@angular/http';
 })
 export class FetchDataComponent {
     public students: Student[];
+    public _http: Http;
 
     constructor(http: Http, @Inject('ORIGIN_URL') originUrl: string) {
-        http.get(originUrl + '/api/students/GetAllStudents').subscribe(result => {
+        this._http = http;
+
+        http.get(originUrl + '/api/students/GetAllStudentsAsync').subscribe(result => {
             this.students = result.json() as Student[];
         });
     }
-}
+
+    doDelete(recordToDelete: Student) {
+        let input = new FormData();
+        input.append("id", recordToDelete.id.toString());
+        input.append("number", recordToDelete.number.toString());
+        input.append("firstName", recordToDelete.firstName);
+        input.append("lastName", recordToDelete.lastName);
+        input.append("hasScholarship", String(recordToDelete.hasScholarship));
+        input.append("teacherId", recordToDelete.teacherId.toString());
+
+        return this._http
+            .post("/api/students/DeleteStudent/", input);        
+    }
+
+
+    deleteStudent(recordToDelete: Student): void {
+        this.doDelete(recordToDelete)
+                .subscribe(res => {
+                    console.log(res);
+                    location.reload(); // refresh display
+                });
+        }
+    }
+
 
 interface Student {
     school: string;
