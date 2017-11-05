@@ -9,6 +9,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { InsertStudentComponent } from './components/insertstudent/insertstudent.component';
+import { InsertTeacherComponent } from './components/insertteacher/insertteacher.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -19,7 +20,8 @@ export const sharedConfig: NgModule = {
         FetchDataComponent,
         HomeComponent,
         UploadComponent,
-        InsertStudentComponent
+        InsertStudentComponent,
+        InsertTeacherComponent
     ],
     imports: [
         FormsModule,
@@ -31,6 +33,7 @@ export const sharedConfig: NgModule = {
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'upload', component: UploadComponent },
             { path: 'insertstudent', component: InsertStudentComponent },
+            { path: 'insertteacher', component: InsertTeacherComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

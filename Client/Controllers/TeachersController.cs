@@ -36,7 +36,7 @@ namespace SchoolChallenge.Client.Controllers
         }
 
         [HttpPost("[action]")]
-        public void DeleteTeacher(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
+        public void DeleteTeacher(int id, string number, string firstName, string lastName)
         {
             var path = $"api/Teachers/delete";
 
@@ -44,6 +44,23 @@ namespace SchoolChallenge.Client.Controllers
             {
                 new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
                 new KeyValuePair<string, string>("id", id.ToString()),
+                new KeyValuePair<string, string>("firstName", firstName),
+                new KeyValuePair<string, string>("lastName", lastName)
+            });
+
+            _httpClient.PostAsync(path, formContent);
+        }
+
+        [HttpPost("[action]")]
+        public void InsertTeacher(int id, string number, string firstName, string lastName)
+        {
+            var path = $"api/Teachers/insert";
+
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
+                new KeyValuePair<string, string>("id", id.ToString()),
+                new KeyValuePair<string, string>("number", number),
                 new KeyValuePair<string, string>("firstName", firstName),
                 new KeyValuePair<string, string>("lastName", lastName)
             });
