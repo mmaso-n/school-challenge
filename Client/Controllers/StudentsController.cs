@@ -51,7 +51,7 @@ namespace SchoolChallenge.Client.Controllers
                 new KeyValuePair<string, string>("teacherId", teacherId.ToString())
             });
 
-            _httpClient.PostAsync(path, formContent);            
+            _httpClient.PostAsync(path, formContent);
         }
     }
 }

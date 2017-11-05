@@ -9,12 +9,14 @@
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let teacher of teachers">
             <td>{{ teacher.id }}</td>
             <td>{{ teacher.lastName }}, {{ teacher.firstName }}</td>
+            <td><span class='glyphicon glyphicon-trash' (click)="deleteTeacher(teacher)" style="cursor: pointer;" title="delete"></span></td>
         </tr>
     </tbody>
 </table>

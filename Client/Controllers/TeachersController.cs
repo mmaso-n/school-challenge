@@ -34,5 +34,21 @@ namespace SchoolChallenge.Client.Controllers
 
             return results;
         }
+
+        [HttpPost("[action]")]
+        public void DeleteTeacher(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
+        {
+            var path = $"api/Teachers/delete";
+
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
+                new KeyValuePair<string, string>("id", id.ToString()),
+                new KeyValuePair<string, string>("firstName", firstName),
+                new KeyValuePair<string, string>("lastName", lastName)
+            });
+
+            _httpClient.PostAsync(path, formContent);
+        }
     }
 }
