@@ -28,7 +28,7 @@ namespace SchoolChallenge.Client.Controllers
             if (file == null) throw new Exception("File is null");
             if (file.Length == 0) throw new Exception("File is empty");
 
-            var path = $"api/{dataType}/InsertAsync";
+            var path = $"api/{dataType}/insert";
             var response = new HttpResponseMessage();
 
             switch (dataType)

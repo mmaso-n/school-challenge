@@ -57,7 +57,7 @@ namespace SchoolChallenge.Services.Controllers
         }
 
         // POST: insert/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}
-        [Route("insert/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}")]
+        [Route("insert")]
         [HttpPost]
         public async Task<IActionResult> InsertAsync(string school, int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
         {
@@ -78,7 +78,8 @@ namespace SchoolChallenge.Services.Controllers
         }
 
         // POST: update/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}
-        [Route("update/{school}/{id}/{number}/{firstName}/{lastName}/{hasScholarship}/{teacherId}")]
+        [Route("update")]
+        [HttpPost]
         public async Task<IActionResult> UpdateAsync(string school, int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
         {
             var toUpdate = new Student

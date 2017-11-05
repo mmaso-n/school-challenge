@@ -57,7 +57,7 @@ namespace SchoolChallenge.Services.Controllers
         }
 
         // POST: insert/{school}/{id}/{firstName}/{lastName}}
-        [Route("insert/{school}/{id}/{firstName}/{lastName}")]
+        [Route("insert")]
         [HttpPost]
         public async Task<IActionResult> InsertAsync(string school, int id, string firstName, string lastName)
         {
@@ -75,7 +75,8 @@ namespace SchoolChallenge.Services.Controllers
         }
 
         // POST: update/{school}/{id}/{firstName}/{lastName}}
-        [Route("update/{school}/{id}/{firstName}/{lastName}")]
+        [Route("update")]
+        [HttpPost]
         public async Task<IActionResult> UpdateAsync(string school, int id, string firstName, string lastName)
         {
             var toUpdate = new Teacher
