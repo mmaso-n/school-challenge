@@ -6,7 +6,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { TeachersComponent } from './components/teachers/teachers.component';
-import { BlogComponent } from './components/blog/blog.component';
+import { UploadComponent } from './components/upload/upload.component';
 import { PostComponent } from './components/post/post.component';
 
 export const sharedConfig: NgModule = {
@@ -17,7 +17,7 @@ export const sharedConfig: NgModule = {
         TeachersComponent,
         FetchDataComponent,
         HomeComponent,
-        BlogComponent,
+        UploadComponent,
         PostComponent
     ],
     imports: [
@@ -26,8 +26,8 @@ export const sharedConfig: NgModule = {
             { path: 'home', component: HomeComponent },
             { path: 'teachers', component: TeachersComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'blog', component: BlogComponent },
-            { path: 'blog/:id', component: PostComponent },
+            { path: 'upload', component: UploadComponent },
+            //{ path: 'blog/:id', component: PostComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

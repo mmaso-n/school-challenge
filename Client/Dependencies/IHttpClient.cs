@@ -8,6 +8,7 @@ namespace SchoolChallenge.Client.Dependencies
     public interface IHttpClient
     {
         Task<HttpResponseMessage> GetAsync(string requestUri);
+        Task<HttpResponseMessage> PostAsync(string requestUri, FormUrlEncodedContent content);
     }
 
     public class ServicesHttpClient : IHttpClient, IDisposable
@@ -29,6 +30,11 @@ namespace SchoolChallenge.Client.Dependencies
         public async Task<HttpResponseMessage> GetAsync(string requestUri)
         {
             return await _innerClient.GetAsync(requestUri); 
+        }
+
+        public async Task<HttpResponseMessage> PostAsync(string requestUri, FormUrlEncodedContent content)
+        {
+            return await _innerClient.PostAsync(requestUri, content);
         }
     }
 }

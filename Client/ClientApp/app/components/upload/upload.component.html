@@ -1,0 +1,48 @@
+﻿<h1>Upload Data</h1>
+
+<p>Here you can upload student &amp; teacher data using .csv files. Format your data files as shown in these example files:</p>
+
+<ul>
+    <li><a href="sample-files/Interview-Data-Students.csv" target="_blank"><strong>Sample Student Data File</strong></a></li>
+    <li><a href="sample-files/Interview-Data-Teachers.csv" target="_blank"><strong>Sample Teacher Data File</strong></a></li>
+</ul>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>Upload Student Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input #fileInput type="file" accept=".csv" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="uploadStudentFile()">Upload Now</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>Upload Teacher Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <input #fileInputTeacher type="file" accept=".csv" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="uploadTeacherFile()">Upload Now</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
