@@ -37,8 +37,9 @@
         <div class="navbar-fixed-bottom">
             <ul class='nav navbar-nav'>
                 <li>
-                    <a [routerLink]="['/contact-us']">
-                        <span class='glyphicon glyphicon-question-sign'></span> Get Help
+                    <a class="hand">
+                        <span class='glyphicon glyphicon-question-sign' (click)="displayHelpToast()"> Help</span>
+                        <div id="snackbar">For help email mmasonsoftwaredevelopment@gmail.com</div>
                     </a>
                 </li>
             </ul>
