@@ -36,9 +36,9 @@ namespace SchoolChallenge.Services.Controllers
             return results;
         }
 
-        // GET: search/{school}
-        [Route("search/{school}")]
-        [HttpGet]
+        // GET: search/
+        [Route("search/")]
+        [HttpPost]
         public async Task<IEnumerable<Student>> SearchAsync(string school, int? studentId, string studentNumber = null, string firstName = null,
                    string lastName = null, int? teacherId = null, bool? hasScholarship = default(bool?))
         {
@@ -47,7 +47,16 @@ namespace SchoolChallenge.Services.Controllers
 
             do
             {
-                var result = await _dataRepository.SearchStudentsAsync(school, studentId, studentNumber, firstName, lastName, teacherId, hasScholarship, tableContinuationToken);
+                var result = await _dataRepository.SearchStudentsAsync(
+                    school, 
+                    studentId, 
+                    studentNumber, 
+                    firstName, 
+                    lastName, 
+                    teacherId, 
+                    hasScholarship, 
+                    tableContinuationToken);
+
                 tableContinuationToken = result.ContinuationToken;
                 results.AddRange(result.Results);
             }

@@ -2,9 +2,16 @@
 
 <p *ngIf="!students"><em>Loading...</em></p>
 
-<a [routerLink]="['/insertstudent']">
-    <span style="cursor:pointer;">Add Student</span>
-</a>
+<span class="pull-left">
+    <a [routerLink]="['/insertstudent']">
+        <span style="cursor:pointer;">Add Student</span>
+    </a>
+</span>
+<span class="pull-right">
+    <a [routerLink]="['/searchstudent']">
+        <span style="cursor:pointer;">Search Students</span>
+    </a>
+</span>
 
 <table class='table' *ngIf="students">
     <thead>

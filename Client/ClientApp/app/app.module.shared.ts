@@ -10,6 +10,8 @@ import { TeachersComponent } from './components/teachers/teachers.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { InsertStudentComponent } from './components/insertstudent/insertstudent.component';
 import { InsertTeacherComponent } from './components/insertteacher/insertteacher.component';
+import { SearchStudentComponent } from './components/searchstudent/searchstudent.component';
+import { SearchTeacherComponent } from './components/searchteacher/searchteacher.component';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -21,7 +23,9 @@ export const sharedConfig: NgModule = {
         HomeComponent,
         UploadComponent,
         InsertStudentComponent,
-        InsertTeacherComponent
+        InsertTeacherComponent,
+        SearchStudentComponent,
+        SearchTeacherComponent
     ],
     imports: [
         FormsModule,
@@ -34,6 +38,8 @@ export const sharedConfig: NgModule = {
             { path: 'upload', component: UploadComponent },
             { path: 'insertstudent', component: InsertStudentComponent },
             { path: 'insertteacher', component: InsertTeacherComponent },
+            { path: 'searchstudent', component: SearchStudentComponent },
+            { path: 'searchteacher', component: SearchTeacherComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

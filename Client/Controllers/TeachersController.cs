@@ -67,5 +67,29 @@ namespace SchoolChallenge.Client.Controllers
 
             _httpClient.PostAsync(path, formContent);
         }
+
+        [HttpPost("[action]")]
+        public async Task<IEnumerable<Teacher>> SearchTeacherAsync(string school, int? teacherId = null, string firstName = null, string lastName = null)
+        {
+            var results = new List<Teacher>();
+            var path = $"api/Teachers/search";
+
+            var formContent = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("school", _tenantConfiguration.Tenant),
+                new KeyValuePair<string, string>("teacherId", teacherId.ToString()),
+                new KeyValuePair<string, string>("firstName", firstName),
+                new KeyValuePair<string, string>("lastName", lastName)
+            });
+
+            HttpResponseMessage response = await _httpClient.PostAsync(path, formContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                results = await response.Content.ReadAsAsync<List<Teacher>>();
+            }
+
+            return results;
+        }
     }
 }

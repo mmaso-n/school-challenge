@@ -144,19 +144,19 @@ namespace SchoolChallenge.Repository
                 CreateCloudTableClient().
                 GetTableReference(_studentTableName);
 
-            var filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school);
+            var filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school.Trim());
             
             if (studentId.HasValue)
                 filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, studentId.Value.ToString()));
 
             if (!string.IsNullOrWhiteSpace(studentNumber))
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.Number), QueryComparisons.Equal, studentNumber));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.Number), QueryComparisons.Equal, studentNumber.Trim()));
 
             if (!string.IsNullOrWhiteSpace(firstName))
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.FirstName), QueryComparisons.Equal, firstName));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.FirstName), QueryComparisons.Equal, firstName.Trim()));
 
             if (!string.IsNullOrWhiteSpace(lastName))
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.LastName), QueryComparisons.Equal, lastName));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(StudentEntity.LastName), QueryComparisons.Equal, lastName.Trim()));
 
             if (teacherId.HasValue)
                 filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterConditionForInt(nameof(StudentEntity.TeacherId), QueryComparisons.Equal, teacherId.Value));
@@ -187,13 +187,13 @@ namespace SchoolChallenge.Repository
             var filter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, school);
 
             if (teacherId.HasValue)
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, teacherId.Value.ToString()));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, teacherId.Value.ToString().Trim()));
 
             if (!string.IsNullOrWhiteSpace(firstName))
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.FirstName), QueryComparisons.Equal, firstName));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.FirstName), QueryComparisons.Equal, firstName.Trim()));
 
             if (!string.IsNullOrWhiteSpace(lastName))
-                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.LastName), QueryComparisons.Equal, lastName));
+                filter = TableQuery.CombineFilters(filter, TableOperators.And, TableQuery.GenerateFilterCondition(nameof(TeacherEntity.LastName), QueryComparisons.Equal, lastName.Trim()));
 
             var query = new TableQuery<TeacherEntity>().Where(filter.ToString());
 

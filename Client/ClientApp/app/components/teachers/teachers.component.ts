@@ -44,7 +44,6 @@ export class TeachersComponent {
 interface Teacher {
     school: string;
     id: number;
-    number: number;
     firstName: string;
     lastName: string
 }
