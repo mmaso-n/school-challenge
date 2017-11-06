@@ -78,6 +78,31 @@ namespace Repository.Tests
         }
 
         [Fact]
+        public void TestStudentContractToStudentEntityWithWhitespace()
+        {
+            var student = new Student
+            {
+                School = "          MPS          ",
+                Id = 770,
+                Number = "            11009-B              ",
+                FirstName = "                   Johnny      ",
+                LastName = " Cash     ",
+                HasScholarship = true,
+                TeacherId = 4
+            };
+
+            var result = student.ToRepositoryEntity();
+
+            result.PartitionKey.Should().BeEquivalentTo("MPS");
+            result.RowKey.Should().BeEquivalentTo("770");
+            result.Number.Should().BeEquivalentTo("11009-B");
+            result.FirstName.Should().BeEquivalentTo("Johnny");
+            result.LastName.Should().BeEquivalentTo("Cash");
+            result.HasScholarship.Should().BeTrue();
+            result.TeacherId.ShouldBeEquivalentTo(4);
+        }
+
+        [Fact]
         public void TestStudentEntityToStudentContract()
         {
             var student = new StudentEntity
@@ -111,6 +136,25 @@ namespace Repository.Tests
                 Id = 4009, 
                 FirstName = "Johnny", 
                 LastName = "Cash"
+            };
+
+            var result = teacher.ToRepositoryEntity();
+
+            result.PartitionKey.Should().BeEquivalentTo("MPS");
+            result.RowKey.Should().BeEquivalentTo("4009");
+            result.FirstName.Should().BeEquivalentTo("Johnny");
+            result.LastName.Should().BeEquivalentTo("Cash");
+        }
+
+        [Fact]
+        public void TestTeacherContractToTeacherEntityWithWhitespace()
+        {
+            var teacher = new Teacher
+            {
+                School = "     MPS    ",
+                Id = 4009,
+                FirstName = "             Johnny   ",
+                LastName = "    Cash         "
             };
 
             var result = teacher.ToRepositoryEntity();

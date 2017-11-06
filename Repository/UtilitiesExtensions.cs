@@ -24,11 +24,11 @@ namespace SchoolChallenge.Repository
         {
             return new StudentEntity
             {
-                PartitionKey = student.School, 
+                PartitionKey = student.School?.Trim(), 
                 RowKey = student.Id.ToString(),
-                Number = student.Number,
-                FirstName = student.FirstName,
-                LastName = student.LastName,
+                Number = student.Number?.Trim(),
+                FirstName = student.FirstName?.Trim(),
+                LastName = student.LastName?.Trim(),
                 TeacherId = student.TeacherId,
                 HasScholarship = student.HasScholarship
             };
@@ -52,10 +52,10 @@ namespace SchoolChallenge.Repository
         {
             return new TeacherEntity
             {
-                PartitionKey = teacher.School, 
+                PartitionKey = teacher.School?.Trim(), 
                 RowKey = teacher.Id.ToString(), 
-                FirstName = teacher.FirstName, 
-                LastName = teacher.LastName
+                FirstName = teacher.FirstName?.Trim(), 
+                LastName = teacher.LastName?.Trim()
             };
         }
 

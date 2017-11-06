@@ -36,7 +36,7 @@ namespace SchoolChallenge.Client.Controllers
         }
 
         [HttpPost("[action]")]
-        public void DeleteStudent(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
+        public async void DeleteStudentAsync(int id, string number, string firstName, string lastName, bool hasScholarship, int teacherId)
         {
             var path = $"api/Students/delete";
 
@@ -51,7 +51,7 @@ namespace SchoolChallenge.Client.Controllers
                 new KeyValuePair<string, string>("teacherId", teacherId.ToString())
             });
 
-            _httpClient.PostAsync(path, formContent);
+            await _httpClient.PostAsync(path, formContent);
         }
 
         [HttpPost("[action]")]

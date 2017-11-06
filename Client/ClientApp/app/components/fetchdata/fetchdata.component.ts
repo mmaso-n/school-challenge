@@ -27,7 +27,7 @@ export class FetchDataComponent {
         input.append("teacherId", recordToDelete.teacherId.toString());
 
         return this._http
-            .post("/api/students/DeleteStudent/", input);        
+            .post("/api/students/DeleteStudentAsync/", input);        
     }
 
 

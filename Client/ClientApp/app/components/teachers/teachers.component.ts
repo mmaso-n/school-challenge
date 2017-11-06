@@ -24,7 +24,7 @@ export class TeachersComponent {
         input.append("lastName", recordToDelete.lastName);
 
         return this._http
-            .post("/api/teachers/DeleteTeacher/", input);
+            .post("/api/teachers/DeleteTeacherAsync/", input);
     }
 
     deleteTeacher(recordToDelete: Teacher): void {
